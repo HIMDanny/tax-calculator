@@ -1,0 +1,9 @@
+# deps
+node_modules/
+
+# IDE
+.vscode/*
+!.vscode/*.template.json
+.idea/
+
+.env

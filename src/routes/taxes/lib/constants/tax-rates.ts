@@ -1,4 +1,4 @@
-import type { TaxRate } from '~/routes/taxes/tax-rate.schemas';
+import type { TaxRate } from '~/routes/taxes/taxes.schemas';
 
 import { TaxGroup } from '~/lib/enums/tax-group';
 import { TaxRateName } from '~/lib/enums/tax-rate-name';

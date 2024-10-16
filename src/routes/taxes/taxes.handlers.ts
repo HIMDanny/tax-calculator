@@ -1,18 +1,29 @@
-import type { RouteHandler } from '@hono/zod-openapi';
+import type { AppRouteHandler } from '~/lib/types/app-route-handler';
 
-import type { TaxRatesRouter } from './taxes.routes';
+import { HttpStatusCode } from '~/lib/enums/http-status-code';
 
-export const taxRates: RouteHandler<TaxRatesRouter> = (c) => {
+import type { CalculateTaxRouter, TaxRatesRouter } from './taxes.routes';
+
+import * as taxService from './taxes.service';
+
+export const calculateTax: AppRouteHandler<CalculateTaxRouter> = async (c) => {
+  const taxInfo = c.req.valid('json');
+
+  const {
+    militaryContribution,
+    singleSocialContribution,
+    taxAmount,
+  } = taxService.calculateTax(taxInfo);
+
   return c.json({
-    simplified: {
-      group1: { taxRate: 0.05, socialContributionRate: 0.22 },
-      group2: { taxRate: 0.03, socialContributionRate: 0.22 },
-      group3: { taxRate: 0.02, socialContributionRate: 0.22 },
-    },
-    general: {
-      taxRate: 0.18,
-      socialContributionRate: 0.22,
-      militaryContributionRate: 0.015,
-    },
-  });
+    taxAmount,
+    militaryContribution,
+    singleSocialContribution,
+  }, HttpStatusCode.OK);
+};
+
+export const taxRates: AppRouteHandler<TaxRatesRouter> = (c) => {
+  const taxRates = taxService.getTaxRates();
+
+  return c.json(taxRates, HttpStatusCode.OK);
 };

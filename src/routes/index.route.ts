@@ -1,7 +1,7 @@
-import { createRoute, z } from '@hono/zod-openapi';
+import { createRoute } from '@hono/zod-openapi';
 
-import { HttpStatusCode } from '~/lib/enums/http-status-code';
 import { createRouter } from '~/lib/create-app';
+import { HttpStatusCode } from '~/lib/enums/http-status-code';
 import { jsonContent } from '~/lib/helpers/json-content';
 import { createMessageObjectSchema } from '~/lib/helpers/schemas/create-message-object';
 

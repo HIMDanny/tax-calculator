@@ -5,7 +5,7 @@ import { TaxRateName } from '~/lib/enums/tax-rate-name';
 
 import { LIVING_WAGE, MINIMUM_WAGE, TAX_RATES } from './lib/constants/tax-rates';
 
-function getGroupTaxRate({
+export function getGroupTaxRate({
   taxGroup,
   name,
   withVAT = false,
